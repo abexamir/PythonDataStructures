@@ -40,26 +40,26 @@ class LinkedList:
         current_node = self.get_head_node()
         if current_node.get_value() == value_to_remove:
             self.head_node = current_node.get_next_node()
-            while current_node:
-                if current_node.get_next_node():
-                    if current_node.get_next_node().get_value() == value_to_remove:
-                        current_node.set_next_node(current_node.get_next_node().get_next_node())
-                else:
-                    break
-                current_node = current_node.get_next_node()
+        while current_node:
+            if current_node.get_next_node():
+                if current_node.get_next_node().get_value() == value_to_remove:
+                    current_node.set_next_node(current_node.get_next_node().get_next_node())
+            else:
+                break
+            current_node = current_node.get_next_node()
 
 
-# if __name__ == '__main__':
-#     ll = LinkedList(5)
-#     ll.insert_beginning(6)
-#     ll.insert_beginning(8)
-#     ll.insert_beginning(7)
-#     ll.insert_beginning(5)
-#     ll.insert_beginning(8)
-#     print(ll.stringify_list())
-#     print("-------------------")
-#     ll.remove_node(8)
-#     print(ll.stringify_list())
-#     print("-------------------")
-#     ll.remove_node(5)
-#     print(ll.stringify_list())
+if __name__ == '__main__':
+    ll = LinkedList(5)
+    ll.insert_beginning(6)
+    ll.insert_beginning(8)
+    ll.insert_beginning(7)
+    ll.insert_beginning(5)
+    ll.insert_beginning(8)
+    print(ll.stringify_list())
+    print("-------------------")
+    ll.remove_node(8)
+    print(ll.stringify_list())
+    print("-------------------")
+    ll.remove_node(5)
+    print(ll.stringify_list())
