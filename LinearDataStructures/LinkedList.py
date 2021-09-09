@@ -25,6 +25,24 @@ class LinkedList:
         new_node.set_next_node(self.head_node)
         self.head_node = new_node
 
+    def insert_at_end(self, new_value):
+        new_node = Node(new_value)
+        if self.head_node is None:
+            self.head_node = new_node
+            return
+        tail_node = self.head_node
+        while tail_node:
+            tail_node = tail_node.get_next_node()
+        tail_node.set_next_node(new_node)
+        
+    def insert_after_node(self, prev_node, value):
+        if not prev_node:
+            print("previous node does not exist")
+            return
+        new_node = Node(value)
+        new_node.set_next_node(prev_node.get_next_node())
+        prev_node.set_next_node(new_node)
+
     def stringify_list(self):
         node = self.get_head_node()
         nodesString = str(node.get_value())
@@ -88,3 +106,15 @@ class LinkedList:
         node2.set_next_node(temp)
 
 
+    def get_length(self):
+        current_node = self.head_node
+        length = 0
+        while current_node:
+            length = length + 1
+            current_node = current_node.get_next_node()
+        return length
+
+    def get_length_from_node_to_end(self, node):
+        if node is None:
+            return 0
+        return 1 + self.get_length_from_node_to_end(node.get_next_node())
