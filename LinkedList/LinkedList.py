@@ -187,3 +187,17 @@ class LinkedList:
                 duplicate_values[current_node.get_value()] = 1
                 prev_node = current_node
             current_node = prev_node.get_next_node()
+    
+    def nth_from_last(self, n):
+        total_length = self.get_length()
+
+        current_node = self.get_head_node()
+        while current_node:
+            if total_length == n:
+                print(current_node.get_value())
+                return current_node.get_value()
+            total_length -= 1
+            current_node = current_node.get_next_node()
+        if current_node is None:
+            return
+
