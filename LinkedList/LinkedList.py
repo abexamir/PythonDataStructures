@@ -105,7 +105,27 @@ class LinkedList:
         node1.set_next_node(node2.get_next_node())
         node2.set_next_node(temp)
 
+    def reverse(self):
+        prev_node = None
+        current_node = self.head_node
+        while current_node:
+            next_node = current_node.get_next_node()
+            current_node.set_next_node(prev_node)
+            prev_node = current_node
+            current_node = next_node
+        self.head_node = prev_node
 
+    def reverse_recursive(self):
+        def _reverse_recursive(current_node, prev_node):
+            if not current_node:
+                return prev_node
+            next_node = current_node.get_next_node()
+            current_node.set_next_node(prev_node)
+            prev_node = current_node
+            current_node = next_node
+            return _reverse_recursive(current_node, prev_node)
+        self.head_node = _reverse_recursive(current_node=self.get_head_node, prev_node=None)
+        
     def get_length(self):
         current_node = self.head_node
         length = 0
@@ -118,3 +138,52 @@ class LinkedList:
         if node is None:
             return 0
         return 1 + self.get_length_from_node_to_end(node.get_next_node())
+
+    def merge_sorted(self, llist):
+        p = self.head_node
+        q = llist.head_node
+        s = None
+
+        if not p:
+            return q
+        if not q:
+            return p 
+
+        if p and q:
+            if p.get_value() <= q.get_value():
+                s = p 
+                p = s.get_next_node()
+            else:
+                s = q
+                q = s.get_next_node()
+            new_head = s 
+        while p and q:
+            if p.get_value() <= q.get_value():
+                s.set_next_node(p)
+                s = p 
+                p = s.get_next_node()
+            else:
+                s.set_next_node(q)
+                s = q
+                q = s.get_next_node()
+        if not p:
+            s.set_next_node(q)
+        if not q:
+            s.set_next_node(p)
+
+        self.head_node = new_head
+        return self.head_node   
+    
+    def remove_duplicates(self):
+        current_node = self.head_node
+        prev_node = None
+        duplicate_values = dict()
+
+        while current_node:
+            if current_node.get_value in duplicate_values:
+                prev_node.set_next_node(current_node.get_next_node())
+                current_node = None
+            else:
+                duplicate_values[current_node.get_value()] = 1
+                prev_node = current_node
+            current_node = prev_node.get_next_node()
